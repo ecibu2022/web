@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Firebase Web App</title>
+  </head>
+  <body>
+    <form id="registerForm">
+      <input type="text" name="name" id="name" placeholder="Name" /><br />
+      <input type="email" name="email" id="email" placeholder="Email" /><br />
+      <input
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Password"
+      /><br />
+      <input type="submit" value="Register" id="signup" />
+    </form>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+      import {
+        getDatabase,
+        ref,
+        set,
+      } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+      import {
+        getAuth,
+        createUserWithEmailAndPassword,
+      } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyC4QMpzKXhZZZmIqo89Kz-12qQqEhgOhzI",
+        authDomain: "test-1c34d.firebaseapp.com",
+        projectId: "test-1c34d",
+        storageBucket: "test-1c34d.appspot.com",
+        messagingSenderId: "226815710210",
+        appId: "1:226815710210:web:6529b1d4f3915d8db1c31b",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const database = getDatabase(app);
+      const auth = getAuth(app);
+
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent form submission
+
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+
+          createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+              // Signed up
+              const user = userCredential.user;
+              alert("User Created");
+
+              // Save user data to Realtime Database
+              const userRef = ref(database, "users/" + user.uid);
+              set(userRef, {
+                name: name,
+                email: email,
+                password: password,
+                lastSaved: Date.now(),
+              })
+                .then(() => {
+                  alert("User data saved to Realtime Database");
+                })
+                .catch((error) => {
+                  alert("Error saving data:", error.message);
+                });
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              alert(errorMessage);
+            });
+        });
+    </script>
+    
+  </body>
+</html>
