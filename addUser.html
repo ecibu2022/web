@@ -9,26 +9,23 @@
     <form id="registerForm">
       <input type="text" name="name" id="name" placeholder="Name" /><br />
       <input type="email" name="email" id="email" placeholder="Email" /><br />
-      <input
-        type="password"
-        name="password"
-        id="password"
-        placeholder="Password"
-      /><br />
+      <input type="number" name="contact" id="contact" placeholder="Contact" /><br />
+      <input type="text" name="address" id="address" placeholder="Address" /><br />
+      <select name="role" id="role">
+        <option value="extension_worker">extension_worker</option>
+        <option value="farmer">farmer</option>
+      </select><br />
+      <label for="">Profile Picture(Optional)</label><br />
+      <input type="file" name="image" id="image" accept="image/*"><br /> 
+      <input type="text" name="password" id="password" placeholder="Password" /><br />
       <input type="submit" value="Register" id="signup" />
     </form>
 
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-      import {
-        getDatabase,
-        ref,
-        set,
-      } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
-      import {
-        getAuth,
-        createUserWithEmailAndPassword,
-      } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+      import { getDatabase, ref, set, } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+      import { getAuth, createUserWithEmailAndPassword, } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+      import { getStorage, ref as storageRef, uploadBytes } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 
       // Your web app's Firebase configuration
       const firebaseConfig = {
@@ -44,6 +41,7 @@
       const app = initializeApp(firebaseConfig);
       const database = getDatabase(app);
       const auth = getAuth(app);
+      const storage = getStorage(app);
 
       document
         .getElementById("registerForm")
@@ -52,6 +50,10 @@
 
           const name = document.getElementById("name").value;
           const email = document.getElementById("email").value;
+          const contact=document.getElementById("contact").value;
+          const address=document.getElementById("address").value;
+          const role=document.getElementById("role").value;
+          const image = document.getElementById("image").files[0]; 
           const password = document.getElementById("password").value;
 
           createUserWithEmailAndPassword(auth, email, password)
@@ -59,12 +61,24 @@
               // Signed up
               const user = userCredential.user;
               alert("User Created");
+               let imageURL = ""; // Initialize image URL variable
+
+          if (image) {
+            // If an image was uploaded, upload it to Firebase Storage
+            const imageRef = storageRef(storage, "images/" + user.uid + "/" + image.name);
+            uploadBytes(imageRef, image);
+            imageURL = imageRef.getDownloadURL(); // Get the download URL of the uploaded image
+          }
 
               // Save user data to Realtime Database
               const userRef = ref(database, "users/" + user.uid);
               set(userRef, {
                 name: name,
                 email: email,
+                contact: contact,
+                address: address,
+                role: role,
+                imageURL: imageURL,
                 password: password,
                 lastSaved: Date.now(),
               })

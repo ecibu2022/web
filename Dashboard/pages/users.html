@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>
+    Mango Farm
+  </title>
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <!-- Nucleo Icons -->
+  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+  <style>
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-dialog {
+            position: relative;
+            margin: 10% auto;
+            width: 80%;
+            max-width: 600px;
+        }
+
+         .form-control {
+        display: block;
+        width: 100%;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da; 
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+
+    .form-control:focus {
+        border-color: #ced4da;
+        outline: 0; 
+        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25); 
+    }
+
+        /* Close button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body class="g-sidenav-show  bg-gray-200">
+  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
+    <div class="sidenav-header">
+      <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+      <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
+        <span class="ms-1 font-weight-bold text-white">Admin Panel</span>
+      </a>
+    </div>
+    <hr class="horizontal light mt-0 mb-2">
+    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-white " href="../pages/dashboard.html">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">home</i>
+            </div>
+            <span class="nav-link-text ms-1">Home</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white active bg-success" href="../pages/users.html">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">person</i>
+            </div>
+            <span class="nav-link-text ms-1">Users</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="../pages/approvals.html">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">receipt_long</i>
+            </div>
+            <span class="nav-link-text ms-1">Approvals</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="../pages/verify_workers.html">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
+            </div>
+            <span class="nav-link-text ms-1">Verify Workers</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="../pages/notifications.html">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">notifications</i>
+            </div>
+            <span class="nav-link-text ms-1">Notifications</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="login.html">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">person</i>
+            </div>
+            <span class="nav-link-text ms-1">Logout</span>
+          </a>
+        </li>
+      
+      </ul>
+    </div>
+    
+  </aside>
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+   
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="card my-4">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div class="bg-success shadow-success border-radius-lg pt-4 pb-3">
+                <h6 class="text-white text-capitalize ps-3">Available Users
+<button class="btn bg-gradient-dark float-end" onclick="openModal()">Add User</button></h6>
+              </div>
+            </div>
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="mb-0 text-sm font-weight-bold text-uppercase">Name</th>
+                      <th class="mb-0 text-sm font-weight-bold text-uppercase">Email</th>
+                      <th class="text-center mb-0 text-sm font-weight-bold text-uppercase">Contact</th>
+                      <th class="text-center mb-0 text-sm font-weight-bold text-uppercase">Address</th>
+                      <th class="mb-0 text-sm font-weight-bold text-uppercase">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">John Michael</h6>
+                        <p class="text-xs text-secondary mb-0">Farmer</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                            <p class="text-xs font-weight-bold mb-0">john@creative-tim.com</p>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <p class="text-xs font-weight-bold mb-0">0773665471</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">Mbarara</span>
+                      </td>
+                      <td class="align-middle">
+                        <button type="button" class="btn bg-success col-4 text-white" onclick="openEditForm()">Edit</button>
+                        <a href="" class="btn btn-danger col-4 text-white">Delete</a>
+                      </td>
+                    </tr>
+
+                     <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">John Michael</h6>
+                        <p class="text-xs text-secondary mb-0">Farmer</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                            <p class="text-xs font-weight-bold mb-0">john@creative-tim.com</p>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <p class="text-xs font-weight-bold mb-0">0773665471</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">Mbarara</span>
+                      </td>
+                      <td class="align-middle">
+                        <button type="button" class="btn bg-success col-4 text-white" onclick="openEditForm()">Edit</button>
+                        <a href="" class="btn btn-danger col-4 text-white">Delete</a>
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Edit User Form -->
+              <div class="card-body" style="display: none;" id="editFormContainer">
+                 <div class="container row justify-content-center">
+                <h6 class="modal-title">Update an existing user</h6>
+                 <form class="form">
+                  <div class="col-8 mt-2">
+                        <input type="text" name="name" class="form-control" placeholder="Name">
+                    </div>
+                <div class="col-8 mt-2">
+                <input type="text" name="email" class="form-control" placeholder="YourEmail@gmail.com">
+                </div>
+                  <div class="col-8 mt-2">
+                        <input type="number" name="contact" class="form-control" placeholder="Telephone">
+                    </div>
+                    <div class="col-8 mt-2">
+                        <input type="text" name="address" class="form-control" placeholder="Address">
+                    </div>
+                    <div class="mt-2">
+                <input type="submit" value="Update User" class="btn btn-success">
+                <button type="button" class="btn btn-danger" onclick="closeEditForm()">Close</button>
+                    </div>
+             </form>
+               </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!-- Add User Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add new user to the system</h5>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+              <div class="row justify-content-center">
+                    <div class="col-8 mt-2">
+                      <label for="">Picture(Optional)</label>
+                        <input type="file" name="picture" class="form-control-file">
+                    </div>
+                </div>
+               <div class="row justify-content-center">
+                    <div class="col-8 mt-2">
+                        <input type="text" name="name" class="form-control" placeholder="Name">
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-8 mt-2">
+                        <input type="email" name="email" class="form-control" placeholder="Email@gmail.com">
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-8 mt-2">
+                        <input type="number" name="contact" class="form-control" placeholder="Telephone">
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-8 mt-2">
+                        <input type="text" name="address" class="form-control" placeholder="Address">
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-8 mt-2 mb-3">
+                        <input type="password" name="password" class="form-control" placeholder="Password">
+                    </div>
+                  </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="closeModal()">Close</button>
+                <button type="button" class="btn btn-success">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+     
+    </div>
+    
+  </main>
+  
+ <script>
+    // Function to open the modal
+    function openModal() {
+        document.getElementById('myModal').style.display = "block";
+    }
+
+    // Function to close the modal
+    function closeModal() {
+        document.getElementById('myModal').style.display = "none";
+    }
+
+    // Close the modal when clicking outside of it
+    window.onclick = function(event) {
+        var modal = document.getElementById('myModal');
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Edit form
+      function openEditForm() {
+    document.getElementById("editFormContainer").style.display = "block"; // Show the edit form
+  }
+
+  function closeEditForm() {
+    document.getElementById("editFormContainer").style.display = "none"; // Hide the edit form
+  }
+
+  function saveChanges() {
+    // Add your code to save changes here
+    // For example, you can get the input values and update the table
+    closeEditForm(); // Close the edit form after saving changes
+  }
+</script>
+
+  <!--   Core JS Files   -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+
+  <script>
+     var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../assets/js/material-dashboard.min.js?v=3.1.0"></script>
+</body>
+
+</html>
