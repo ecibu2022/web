@@ -73,6 +73,7 @@
             text-decoration: none;
             cursor: pointer;
         }
+
     </style>
 </head>
 
@@ -157,6 +158,7 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
+                      <th class="mb-0 text-sm font-weight-bold text-uppercase" style="display: none;">User ID</th>
                       <th class="mb-0 text-sm font-weight-bold text-uppercase">Name</th>
                       <th class="mb-0 text-sm font-weight-bold text-uppercase">Email</th>
                       <th class="text-center mb-0 text-sm font-weight-bold text-uppercase">Contact</th>
@@ -164,62 +166,12 @@
                       <th class="mb-0 text-sm font-weight-bold text-uppercase">Actions</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">John Michael</h6>
-                        <p class="text-xs text-secondary mb-0">Farmer</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                            <p class="text-xs font-weight-bold mb-0">john@creative-tim.com</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <p class="text-xs font-weight-bold mb-0">0773665471</p>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">Mbarara</span>
-                      </td>
-                      <td class="align-middle">
-                        <button type="button" class="btn bg-success col-4 text-white" onclick="openEditForm()">Edit</button>
-                        <a href="" class="btn btn-danger col-4 text-white">Delete</a>
-                      </td>
-                    </tr>
+                  <!-- <tbody> -->
 
-                     <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">John Michael</h6>
-                        <p class="text-xs text-secondary mb-0">Farmer</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                            <p class="text-xs font-weight-bold mb-0">john@creative-tim.com</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <p class="text-xs font-weight-bold mb-0">0773665471</p>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">Mbarara</span>
-                      </td>
-                      <td class="align-middle">
-                        <button type="button" class="btn bg-success col-4 text-white" onclick="openEditForm()">Edit</button>
-                        <a href="" class="btn btn-danger col-4 text-white">Delete</a>
-                      </td>
-                    </tr>
+                     <tbody id="userTableBody" class="p-4">
+            <!-- User data will be dynamically added here -->
+        </tbody>
 
-                  </tbody>
                 </table>
               </div>
 
@@ -227,18 +179,18 @@
               <div class="card-body" style="display: none;" id="editFormContainer">
                  <div class="container row justify-content-center">
                 <h6 class="modal-title">Update an existing user</h6>
-                 <form class="form">
+                 <form class="form"  id="editForm">
                   <div class="col-8 mt-2">
-                        <input type="text" name="name" class="form-control" placeholder="Name">
+                        <input type="text" name="name" id="editName" class="form-control" placeholder="Name">
                     </div>
                 <div class="col-8 mt-2">
-                <input type="text" name="email" class="form-control" placeholder="YourEmail@gmail.com">
+                <input type="text" name="email" id="editEmail" class="form-control" placeholder="YourEmail@gmail.com">
                 </div>
                   <div class="col-8 mt-2">
-                        <input type="number" name="contact" class="form-control" placeholder="Telephone">
+                        <input type="number" name="contact" id="editContact" class="form-control" placeholder="Telephone">
                     </div>
                     <div class="col-8 mt-2">
-                        <input type="text" name="address" class="form-control" placeholder="Address">
+                        <input type="text" name="address" id="editAddress" class="form-control" placeholder="Address">
                     </div>
                     <div class="mt-2">
                 <input type="submit" value="Update User" class="btn btn-success">
@@ -262,41 +214,47 @@
                 <span class="close" onclick="closeModal()">&times;</span>
             </div>
             <div class="modal-body">
-              <div class="row justify-content-center">
-                    <div class="col-8 mt-2">
-                      <label for="">Picture(Optional)</label>
-                        <input type="file" name="picture" class="form-control-file">
-                    </div>
-                </div>
+
+              <form id="registerForm">
                <div class="row justify-content-center">
                     <div class="col-8 mt-2">
-                        <input type="text" name="name" class="form-control" placeholder="Name">
+                        <input type="text" id="name" class="form-control" placeholder="Name">
                     </div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-8 mt-2">
-                        <input type="email" name="email" class="form-control" placeholder="Email@gmail.com">
+                        <input type="email" id="email" class="form-control" placeholder="Email@gmail.com">
                     </div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-8 mt-2">
-                        <input type="number" name="contact" class="form-control" placeholder="Telephone">
+                        <input type="number" id="contact" class="form-control" placeholder="Telephone">
                     </div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-8 mt-2">
-                        <input type="text" name="address" class="form-control" placeholder="Address">
+                        <input type="text" id="address" class="form-control" placeholder="Address">
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-8 mt-2 mb-3">
-                        <input type="password" name="password" class="form-control" placeholder="Password">
+                    <div class="col-8 mt-2">
+                        <input type="password" id="password" class="form-control" placeholder="Password">
                     </div>
                   </div>
+                   <div class="row justify-content-center">
+                    <div class="col-8 mt-2 mb-3">
+                   <select id="role" name="role" class="form-control">
+        <option value="Select Role">Select Role</option>
+        <option value="worker">worker</option>
+        <option value="farmer">farmer</option>
+      </select>
+      </div>
+      </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" onclick="closeModal()">Close</button>
-                <button type="button" class="btn btn-success">Save changes</button>
+                <button type="submit" class="btn btn-success"  id="signup">Save changes</button>
             </div>
+</form>
         </div>
     </div>
 </div>
@@ -338,7 +296,7 @@
     // For example, you can get the input values and update the table
     closeEditForm(); // Close the edit form after saving changes
   }
-</script>
+</script>    
 
   <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>
@@ -359,6 +317,189 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../assets/js/material-dashboard.min.js?v=3.1.0"></script>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+      import { getDatabase, ref, set, get, update } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+      import { getAuth, createUserWithEmailAndPassword, } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+    
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyC4QMpzKXhZZZmIqo89Kz-12qQqEhgOhzI",
+        authDomain: "test-1c34d.firebaseapp.com",
+        projectId: "test-1c34d",
+        storageBucket: "test-1c34d.appspot.com",
+        messagingSenderId: "226815710210",
+        appId: "1:226815710210:web:6529b1d4f3915d8db1c31b",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const database = getDatabase(app);
+      const auth = getAuth(app);
+
+      // Add user
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent form submission
+
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const tel=document.getElementById("contact").value;
+          const address=document.getElementById("address").value;
+          const role=document.getElementById("role").value;
+          const password = document.getElementById("password").value;
+
+          createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+              // Signed up
+              const user = userCredential.user;
+              const UserID = user.uid;
+              alert("User Created");
+
+              // Save user data to Realtime Database
+              const userRef = ref(database, "users/" + UserID);
+              set(userRef, {
+                userID: UserID,
+                name: name,
+                email: email,
+                tel: tel,
+                address: address,
+                role: role,
+                password: password,
+              })
+                .then(() => {
+                  alert("User data saved to Database");
+                  closeModal(); 
+                  // Refresh the page to load the new data
+                  window.location.reload();
+                })
+                .catch((error) => {
+                  alert("Error saving data:", error.message);
+                });
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              alert(errorMessage);
+            });
+        });
+
+        // Function to retrieve users from Firebase Database and populate the table
+        async function populateUserTable() {
+        const usersRef = ref(database, 'users');
+        const snapshot = await get(usersRef);
+
+        if (snapshot.exists()) {
+            snapshot.forEach((childSnapshot) => {
+                const userData = childSnapshot.val();
+                const userRow = `
+                    <tr>
+                       <td style="display: none;">${userData.userID}</td>
+                        <td>${userData.name}</td>
+                        <td>${userData.email}</td>
+                        <td>${userData.tel}</td>
+                        <td>${userData.address}</td>
+                        <td>
+                            <button type="button" class="btn btn-success" onclick="openEditForm('${childSnapshot.key}')">Edit</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteUser('${childSnapshot.key}')">Delete</button>
+                        </td>
+                    </tr>
+                `;
+                
+                document.getElementById('userTableBody').innerHTML += userRow;
+          
+            });
+
+        } else {
+            console.log("No data available");
+        }
+    }
+
+    // Call the function to populate the table when the page loads
+    window.onload = populateUserTable;
+  
+    // Function to open edit form
+    function openEditForm(UserID) {
+        // Retrieve the user data from the database based on the UserID
+        const userRef = ref(database, 'users/' + UserID);
+        get(userRef).then((snapshot) => {
+            if (snapshot.exists()) {
+                const userData = snapshot.val();
+                // Populate the edit form with user data
+                document.getElementById('editFormContainer').style.display = 'block';
+                document.getElementById('editName').value = userData.name;
+                document.getElementById('editEmail').value = userData.email;
+                document.getElementById('editContact').value = userData.tel;
+                document.getElementById('editAddress').value = userData.address;
+                // Set a data attribute on the form to store the UserID
+                document.getElementById('editForm').setAttribute('data-user-id', UserID);
+            } else {
+                console.log("No data available for user ID:", UserID);
+            }
+        }).catch((error) => {
+            console.error("Error retrieving user data:", error);
+        });
+    }
+
+    // Function to handle edit form submission
+    document.getElementById('editForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Retrieve the user ID from the form data attribute
+        const UserID = document.getElementById('editForm').getAttribute('data-user-id');
+        // Retrieve updated user details from the form fields
+        const updatedName = document.getElementById('editName').value;
+        const updatedEmail = document.getElementById('editEmail').value;
+        const updatedContact = document.getElementById('editContact').value;
+        const updatedAddress = document.getElementById('editAddress').value;
+
+        // Update the user data in the database
+        const userRef = ref(database, 'users/' + UserID);
+        update(userRef, {
+            name: updatedName,
+            email: updatedEmail,
+            tel: updatedContact,
+            address: updatedAddress,
+        }).then(() => {
+            console.log("User data updated successfully:", UserID);
+            // Hide the edit form after updating user data
+            document.getElementById('editFormContainer').style.display = 'none';
+            // Reload the page to reflect the changes
+            window.location.reload();
+        }).catch((error) => {
+            console.error("Error updating user data:", error);
+        });
+    });
+
+    // Function to delete a user
+    function deleteUser(UserID) {
+        if (confirm("Are you sure you want to delete this user?")) {
+            // Delete the user data from the database
+            const userRef = ref(database, 'users/' + UserID);
+            set(userRef, null).then(() => {
+                console.log("User deleted successfully:", UserID);
+                // Reload the page to reflect the changes
+                window.location.reload();
+            }).catch((error) => {
+                console.error("Error deleting user:", error);
+            });
+        }
+    }
+
+    // Function to open edit form
+    window.openEditForm = function(UserID) {
+        openEditForm(UserID);
+    };
+
+    // Function to delete user
+    window.deleteUser = function(UserID) {
+        deleteUser(UserID);
+    };
+</script>
+
+
 </body>
 
 </html>
